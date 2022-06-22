@@ -8,7 +8,8 @@ import (
 
 func main(){
 	start := time.Now();
-
+	ch := make(chan string)
+	
 	someApis := []string{
 		"https://baidu.com",
 		"https://qq.com",
@@ -17,25 +18,28 @@ func main(){
 	}
 
 	for _, api := range someApis {
-		go checkApi(api)
+		go checkApi(api, ch)
 	}
-
+	for i:=0; i < len(someApis); i++ {
+		res := <-ch
+		log(res)
+	}
 	end := time.Since(start);
 	log("cost: " + fmt.Sprintf("%f",end.Seconds()))
-
-	time.Sleep(time.Second * 3)
 }
 
-func checkApi(api string)  {
+func checkApi(api string, ch chan string)  {
 	_, err := http.Get(api)
-	if !hasError(err) {
-		log(api + ", done")
+	if !hasError(err, ch) {
+		// log(api + ", done")
+		ch<-fmt.Sprintf("%s done", api)
 	} 
 }
 
-func hasError(err error) bool {
+func hasError(err error, ch chan string) bool {
 	if err != nil {
-		log(err.Error())
+		// log(err.Error())
+		ch <- err.Error()
 		return true
 	}
 	return false
