@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pongtang的主页</title>
+  </head>
+  <body>
+    <button id="button">点击发请求</button>
+    <p id="p1"></p>
+    <script type="text/javascript">
+      var btn = document.getElementById("button");
+      btn.onclick = function () {
+        fetch("http://localhost:8080/home/getuser?id=1001", {
+          //   mode: "no-cors",
+          //   method: "GET", // or 'PUT'
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((res) => {
+            console.log(res);
+            res.json().then((data) => {
+              if (data != undefined) {
+                console.log(data);
+                var text = document.getElementById("p1");
+                text.innerText = data["name"];
+              }
+            });
+          })
+          .catch((error) => console.log(error));
+      };
+    </script>
+  </body>
+</html>
