@@ -1,0 +1,18 @@
+syntax = "proto3";
+// 指定生成目录路径
+option go_package = "./service";
+// 指定包名
+package service;
+// 请求
+message ProductRequest {
+  int32  pro_id = 1;
+}
+// 回包
+message ProductResponse {
+  int32 pro_stock = 1;
+}
+// 定义服务
+service ProdService {
+  // 服务具体实现方法
+  rpc GetProductStock(ProductRequest) returns(ProductResponse);
+}
