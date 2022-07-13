@@ -16,7 +16,7 @@ func (p *productService) mustEmbedUnimplementedProdServiceServer() {
 	panic("please implement me")
 }
 
-/* GetProductStock 需要一个载体来实现 grpc pb文件内的接口, 也是业务逻辑实现的地方
+/* GetProductStock 需要一个载体来实现 grpc pb文件内的接口, 也是业务逻辑实现的地方:
 type ProdServiceServer interface {
 	// 服务具体实现方法
 	GetProductStock(context.Context, *ProductRequest) (*ProductResponse, error)
