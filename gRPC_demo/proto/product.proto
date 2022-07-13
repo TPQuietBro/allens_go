@@ -13,6 +13,6 @@ message ProductResponse {
 }
 // 定义服务
 service ProdService {
-  // 服务具体实现方法
+  // 服务具体实现方法: 获取库存
   rpc GetProductStock(ProductRequest) returns(ProductResponse);
 }
