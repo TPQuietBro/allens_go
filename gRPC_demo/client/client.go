@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"gRPC_demo/server/service"
+	"gRPC_demo/client/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
